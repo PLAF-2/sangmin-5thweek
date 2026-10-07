@@ -1,0 +1,253 @@
+:root {
+  --bg: #f4f4f6;
+  --ink: #1f1f24;
+  --muted: #74747f;
+  --pink: #e48b98;
+  --pink-deep: #c45a6b;
+  --frame: #e4e4e8;
+
+  /* 사진이 바뀌는 속도: 지금 사진이 흐려지는 시간 / 다음 사진이 또렷해지는 시간 */
+  --fade-out: 0.45s;
+  --fade-in: 0.6s;
+  --fade-in-delay: 0.18s;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 56px 16px 96px;
+}
+
+/* 제목 */
+.title {
+  margin: 0 0 28px;
+  text-align: center;
+  font-family: "Fredoka", "Pretendard", sans-serif;
+  font-weight: 700;
+  font-size: clamp(52px, 15vw, 84px);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--pink-deep);
+}
+
+/* 사진 영역 */
+.stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 924 / 1155;
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--frame);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 18px 40px -18px rgba(60, 30, 40, 0.35);
+  touch-action: pan-y;
+  user-select: none;
+}
+
+/* 사진 4장을 겹쳐 두고, is-active 붙은 사진만 또렷하게 보여줌 */
+.stage img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  filter: blur(18px);
+  transform: scale(1.06);
+  transition:
+    opacity var(--fade-out) ease,
+    filter var(--fade-out) ease,
+    transform var(--fade-out) ease;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.stage img.is-active {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+  transition-duration: var(--fade-in);
+  transition-delay: var(--fade-in-delay);
+}
+
+/* 좌우 화살표 */
+.arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-top: -24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  color: var(--ink);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.arrow--left {
+  left: 12px;
+}
+
+.arrow--right {
+  right: 12px;
+}
+
+.arrow svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.arrow:hover {
+  background: #fff;
+  color: var(--pink-deep);
+  transform: scale(1.06);
+}
+
+.arrow:active {
+  transform: scale(0.94);
+}
+
+.arrow:focus-visible {
+  outline: 3px solid var(--pink);
+  outline-offset: 2px;
+}
+
+/* 사진 아래 방향 표시 */
+.view-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.view-label {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #cfcfd6;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.dot.is-active {
+  background: var(--pink-deep);
+  transform: scale(1.25);
+}
+
+/* 스토리 */
+.story {
+  margin-top: 64px;
+}
+
+.story-title {
+  margin: 0 0 16px;
+  font-family: "Fredoka", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  color: var(--pink-deep);
+}
+
+.story p {
+  margin: 0 0 14px;
+  font-size: 17px;
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+/* 친구하기 버튼 */
+.friend {
+  margin-top: 48px;
+  text-align: center;
+}
+
+.friend-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  border-radius: 999px;
+  background: #b84f61;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 24px -10px rgba(184, 79, 97, 0.75);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.friend-button svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s ease;
+}
+
+.friend-button:hover {
+  background: #a54455;
+  transform: translateY(-1px);
+}
+
+.friend-button:hover svg {
+  transform: translateX(3px);
+}
+
+.friend-button:active {
+  transform: scale(0.97);
+}
+
+.friend-button:focus-visible {
+  outline: 3px solid var(--pink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage img,
+  .stage img.is-active {
+    filter: none;
+    transform: none;
+    transition-duration: 0.2s;
+    transition-delay: 0s;
+  }
+}

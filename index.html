@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Waddles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <main class="page">
+    <h1 class="title">WADDLES</h1>
+
+    <!-- 아바타 사진: 순서대로 앞 → 오른쪽 → 뒤 → 왼쪽 (오른쪽 화살표를 누를 때 넘어가는 순서) -->
+    <section class="viewer" aria-label="워들스 사진">
+      <div class="stage" id="stage">
+        <img class="is-active" src="images/front.webp" alt="워들스 앞모습" data-label="FRONT">
+        <img src="images/right.webp" alt="오른쪽으로 돈 워들스" data-label="RIGHT">
+        <img src="images/back.webp" alt="워들스 뒷모습" data-label="BACK">
+        <img src="images/left.webp" alt="왼쪽으로 돈 워들스" data-label="LEFT">
+
+        <button class="arrow arrow--left" id="prev" type="button" aria-label="왼쪽으로 돌리기">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <button class="arrow arrow--right" id="next" type="button" aria-label="오른쪽으로 돌리기">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <div class="view-info">
+        <span class="view-label" id="view-label" aria-live="polite">FRONT</span>
+        <div class="dots" id="dots" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- 워들스 스토리: 아래 문단을 고쳐 쓰면 돼요 -->
+    <section class="story">
+      <h2 class="story-title">STORY</h2>
+      <p>워들스는 돼지예요. 아침마다 갈색 머리를 세우는 데 40분, 하얀 망토를 두르는 데 5분, 나무칼을 메는 데 1분이 걸려요. 아침밥은 2시간 먹어요.</p>
+      <p>칼을 뽑아 본 적은 한 번도 없어요. 손이 안 닿거든요. 그래도 워들스는 오늘도 망토를 펄럭이며 동네를 한 바퀴 돌아요. 담당의한테 다이어트 권고를 받았거든요.</p>
+    </section>
+
+    <!-- 친구하기 버튼: 로블록스 samsamolee 프로필로 이동 -->
+    <section class="friend">
+      <a class="friend-button" href="https://www.roblox.com/users/11756385940/profile" target="_blank" rel="noopener">
+        워들스랑 친구하기
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
