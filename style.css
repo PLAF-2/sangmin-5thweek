@@ -192,6 +192,132 @@ body {
   word-break: keep-all;
 }
 
+/* 달리는 워들스 보기 버튼 */
+.run-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 11px 18px 11px 14px;
+  border: 1.5px solid #e6c7cd;
+  border-radius: 999px;
+  background: #fff;
+  color: #b84f61;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+
+.run-button svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.run-button:hover {
+  border-color: var(--pink);
+  background: #fff6f7;
+}
+
+.run-button:active {
+  transform: scale(0.97);
+}
+
+.run-button:focus-visible {
+  outline: 3px solid var(--pink);
+  outline-offset: 2px;
+}
+
+/* 영상 팝업: is-open이 붙으면 배경이 어두워지고, 영상 카드가 흐릿한 상태에서 또렷해지며 나타남 */
+body.is-locked {
+  overflow: hidden;
+}
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  background: rgba(28, 20, 23, 0.6);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.video-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease;
+}
+
+.video-card {
+  position: relative;
+  width: min(400px, 100%, calc((100vh - 48px) * 0.8));
+  aspect-ratio: 4 / 5;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #2b2326;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5);
+  filter: blur(12px);
+  transform: scale(0.94);
+  transition: filter 0.45s ease, transform 0.45s ease;
+}
+
+.video-modal.is-open .video-card {
+  filter: blur(0);
+  transform: scale(1);
+}
+
+.video-card video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.video-close svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+.video-close:hover {
+  background: #fff;
+  transform: scale(1.06);
+}
+
+.video-close:focus-visible {
+  outline: 3px solid var(--pink);
+  outline-offset: 2px;
+}
+
 /* 친구하기 버튼 */
 .friend {
   margin-top: 48px;
@@ -244,7 +370,9 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .stage img,
-  .stage img.is-active {
+  .stage img.is-active,
+  .video-card,
+  .video-modal.is-open .video-card {
     filter: none;
     transform: none;
     transition-duration: 0.2s;

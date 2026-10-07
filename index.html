@@ -41,6 +41,11 @@
       <h2 class="story-title">STORY</h2>
       <p>워들스는 돼지예요. 아침마다 갈색 머리를 세우는 데 40분, 하얀 망토를 두르는 데 5분, 나무칼을 메는 데 1분이 걸려요. 아침밥은 2시간 먹어요.</p>
       <p>칼을 뽑아 본 적은 한 번도 없어요. 손이 안 닿거든요. 그래도 워들스는 오늘도 망토를 펄럭이며 동네를 한 바퀴 돌아요. 담당의한테 다이어트 권고를 받았거든요.</p>
+
+      <button class="run-button" id="run-open" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+        달리는 워들스 보기
+      </button>
     </section>
 
     <!-- 친구하기 버튼: 로블록스 samsamolee 프로필로 이동 -->
@@ -51,6 +56,16 @@
       </a>
     </section>
   </main>
+
+  <!-- 달리는 워들스 영상 팝업: '달리는 워들스 보기' 버튼을 누르면 열려요 -->
+  <div class="video-modal" id="video-modal" role="dialog" aria-modal="true" aria-label="달리는 워들스">
+    <div class="video-card">
+      <video id="run-video" src="videos/running.mp4" poster="videos/running-poster.webp" muted loop playsinline preload="metadata"></video>
+      <button class="video-close" id="video-close" type="button" aria-label="닫기">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

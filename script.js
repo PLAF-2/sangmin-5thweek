@@ -30,8 +30,44 @@ function show(index) {
 document.getElementById("next").addEventListener("click", () => show(current + 1));
 document.getElementById("prev").addEventListener("click", () => show(current - 1));
 
-// 키보드 ← → 로도 돌리기
+// 달리는 워들스 영상 팝업 열기/닫기
+const page = document.querySelector(".page");
+const modal = document.getElementById("video-modal");
+const runVideo = document.getElementById("run-video");
+const openButton = document.getElementById("run-open");
+const closeButton = document.getElementById("video-close");
+
+function openVideo() {
+  modal.classList.add("is-open");
+  document.body.classList.add("is-locked");
+  page.inert = true; // 팝업이 열려 있는 동안 뒤쪽 페이지는 누를 수 없게
+  runVideo.currentTime = 0;
+  runVideo.play().catch(() => {});
+  closeButton.focus();
+}
+
+function closeVideo() {
+  modal.classList.remove("is-open");
+  document.body.classList.remove("is-locked");
+  page.inert = false;
+  runVideo.pause();
+  openButton.focus();
+}
+
+openButton.addEventListener("click", openVideo);
+closeButton.addEventListener("click", closeVideo);
+
+// 영상 바깥 어두운 곳을 누르면 닫기
+modal.addEventListener("click", (event) => {
+  if (event.target === modal) closeVideo();
+});
+
+// 키보드: 팝업이 열려 있으면 Esc로 닫기, 아니면 ← → 로 사진 돌리기
 document.addEventListener("keydown", (event) => {
+  if (modal.classList.contains("is-open")) {
+    if (event.key === "Escape") closeVideo();
+    return;
+  }
   if (event.key === "ArrowRight") show(current + 1);
   if (event.key === "ArrowLeft") show(current - 1);
 });
